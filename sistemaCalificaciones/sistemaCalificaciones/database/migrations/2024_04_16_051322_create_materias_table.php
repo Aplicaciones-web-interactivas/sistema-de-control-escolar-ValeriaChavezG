@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('materias', function (Blueprint $table) {
             $table->id();
+            $table->string('nombreM');
+            $table->string('nomProf');
+            $table->string('Modalidad');
+            $table->string('Horario');
             $table->timestamps();
+            $table->foreign("nomProf")->references("nom_Prof")->on("maestros")->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign("nombreM")->references("nom_materia")->on("maestros")->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
