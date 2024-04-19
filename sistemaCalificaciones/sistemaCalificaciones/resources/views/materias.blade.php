@@ -28,17 +28,17 @@
                             <input type="text" class="form-control" id="nomProf" name="nomProf" required>
                         </div>
                         <div class="mb-3">
-                         <select class="form-select" id="opcionesSelect1" name="modalidad">
+                         <select class="form-select"  id="opcionesSelect1" name="Modalidad">
                       <option selected>Seleccionar...</option> 
-                        <option value="">Modalidad</option>
-                        <option value="">Presencial</option>
+                        <option value="Presencial" >Presencial</option>
+                        <option value="En linea">En línea</option>
                     </select>
                             {{-- <label for="modalidad" class="form-label">Modalidad</label>
                             <input type="text" class="form-control" id="modalidad" name="modalidad" required> --}}
                         </div>
                         <div class="mb-3">
-                            <label for="horario" class="form-label">Horario</label>
-                            <input type="text" class="form-control" id="horario" name="horario" required>
+                            <label for="Horario" class="form-label">Horario</label>
+                            <input type="text" class="form-control" id="Horario" name="Horario" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </form>
@@ -61,8 +61,8 @@
             <tr>
                 <td>{{ $materia->nombreM }}</td>
                 <td>{{ $materia->nomProf }}</td>
-                <td>{{ $materia->modalidad }}</td>
-                <td>{{ $materia->horario }}</td>
+                <td>{{ $materia->Modalidad }}</td>
+                <td>{{ $materia->Horario }}</td>
                 <td>
                     <a href="{{ route('materias.eliminar', $materia->id) }}" class="btn btn-danger">Eliminar</a>
                 </td>

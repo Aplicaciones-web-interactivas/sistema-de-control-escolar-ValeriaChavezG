@@ -46,17 +46,19 @@ class adminController extends Controller
     }
     //funcion para insertar una materia
     public function nuevaMateria(Request $request){
+        
+
         $nuevaMateria=new materia();
         $nuevaMateria->nombreM = $request->nombreM;
         $nuevaMateria->nomProf = $request->nomProf;
-        $nuevaMateria->modalidad = $request->modalidad;
-        $nuevaMateria->horario = $request->horario;
+        $nuevaMateria->Modalidad = $request->Modalidad;
+        $nuevaMateria->Horario = $request->Horario;
         $nuevaMateria->save();
         return redirect()->back();
     }
     //funcion para eliminar una materia
     public function eliminarMateria($id){
-        $nuevaMateria=alumno::find($id);
+        $nuevaMateria=materia::find($id);
         $nuevaMateria->delete();
         return redirect()->back();
     }

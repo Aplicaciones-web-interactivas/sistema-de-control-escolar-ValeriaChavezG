@@ -34,9 +34,9 @@ Route::middleware('auth')->group(function () {
 });
 Route::middleware('auth')->group(function () {
     // Rutas protegidas
-    Route::get('materias', [AdminController::class, 'materias'])->name('materias');
-    // Route::post('nuevoAlumno',[AdminController::class,'nuevoAlumno'])->name('alumnos.nuevo');
-    // Route::get('eliminarAlumno/{id}',[AdminController::class,'eliminarAlumno'])->name('alumnos.eliminar');
+    Route::get('materias', [AdminController::class, 'listaMaterias'])->name('materias');
+    Route::post('nuevaMateria',[AdminController::class,'nuevaMateria'])->name('materias.nuevo');
+    Route::get('eliminarMateria/{id}',[AdminController::class,'eliminarMateria'])->name('materias.eliminar');
 });
 Route::middleware('auth')->group(function () {
     // Rutas protegidas

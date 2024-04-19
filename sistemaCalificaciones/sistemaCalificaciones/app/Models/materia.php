@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class materia extends Model
 {
-    use HasFactory;
+    protected $fillable = ['nombreM', 'nomProf', 'modalidad', 'horario'];
+
 }
