@@ -15,6 +15,13 @@ use Illuminate\Http\Request;
 
 class adminController extends Controller
 {
+    //función para mostrar los alumnos
+    public function listaAlumnos()
+    {
+        $alumnos = alumno::all();
+        return view('alumnos', compact('alumnos'));
+    }
+
     //función para un nuevo alumno
     public function nuevoAlumno(Request $request){
         $nuevoAlumno=new alumno();
@@ -32,6 +39,11 @@ class adminController extends Controller
         return redirect()->back();
       }
 
+    public function listaMaterias()
+    {
+          $materias = materia::all();
+          return view('materias', compact('materias'));
+    }
     //funcion para insertar una materia
     public function nuevaMateria(Request $request){
         $nuevaMateria=new materia();
@@ -47,6 +59,11 @@ class adminController extends Controller
         $nuevaMateria=alumno::find($id);
         $nuevaMateria->delete();
         return redirect()->back();
+    }
+    public function listaMaestros()
+    {
+          $maestros = maestro::all();
+          return view('maestros', compact('maestros'));
     }
         //funcion para insertar un profesor
     public function nuevoProfesor(Request $request){
