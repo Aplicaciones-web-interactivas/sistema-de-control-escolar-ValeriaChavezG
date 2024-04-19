@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('nomMateria');
             $table->string('salon');
-            $table->integer('hora');
+            $table->integer('NumAlumnos');
             $table->integer('numGrupo');
             $table->timestamps();
-            $table->foreign("nomMateria")->references("nom_materia")->on("maestros")->onDelete('cascade')->onUpdate('cascade');
+            $table->index('nomMateria');
+            $table->foreign("nomMateria")->references("nombreM")->on("materias")->onDelete('cascade')->onUpdate('cascade');
+
 
         });
     }

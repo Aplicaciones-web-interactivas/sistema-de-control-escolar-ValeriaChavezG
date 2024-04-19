@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('Modalidad');
             $table->string('Horario');
             $table->timestamps();
+            $table->index('nombreM');
             $table->foreign("nomProf")->references("nom_Prof")->on("maestros")->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign("nombreM")->references("nom_materia")->on("maestros")->onDelete('cascade')->onUpdate('cascade');
+            // $table->foreign("nombreM")->references("nomMateria")->on("grupos")->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

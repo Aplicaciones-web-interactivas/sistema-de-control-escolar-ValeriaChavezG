@@ -40,13 +40,19 @@ Route::middleware('auth')->group(function () {
 });
 Route::middleware('auth')->group(function () {
     // Rutas protegidas
-    Route::get('grupos', [AdminController::class, 'grupos'])->name('grupos');
+    Route::get('grupos', [AdminController::class, 'listaGrupos'])->name('grupos');
+    Route::post('nuevoGrupo',[AdminController::class,'nuevoGrupo'])->name('grupos.nuevo');
+    Route::get('eliminarGrupo/{id}',[AdminController::class,'eliminarGrupo'])->name('grupos.eliminar');
+});
+Route::middleware('auth')->group(function () {
+    // Rutas protegidas
+    Route::get('calificaciones', [AdminController::class, 'calificaciones'])->name('calificaciones');
     // Route::post('nuevoAlumno',[AdminController::class,'nuevoAlumno'])->name('alumnos.nuevo');
     // Route::get('eliminarAlumno/{id}',[AdminController::class,'eliminarAlumno'])->name('alumnos.eliminar');
 });
 Route::middleware('auth')->group(function () {
     // Rutas protegidas
-    Route::get('calificaciones', [AdminController::class, 'calificaciones'])->name('calificaciones');
+    Route::get('inscripciones', [AdminController::class, 'inscripciones'])->name('inscripciones');
     // Route::post('nuevoAlumno',[AdminController::class,'nuevoAlumno'])->name('alumnos.nuevo');
     // Route::get('eliminarAlumno/{id}',[AdminController::class,'eliminarAlumno'])->name('alumnos.eliminar');
 });

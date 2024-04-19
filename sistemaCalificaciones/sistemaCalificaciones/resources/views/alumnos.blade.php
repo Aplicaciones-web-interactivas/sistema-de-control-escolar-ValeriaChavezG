@@ -32,8 +32,8 @@
                             <input type="number" class="form-control" id="semestre" name="semestre" required>
                         </div>
                         <div class="mb-3">
-                            <label for="matIns" class="form-label">Materias inscritas</label>
-                            <input type="text" class="form-control" id="matIns" name="matIns" required>
+                            <label for="matIns" class="form-label">Creditos disponibles este semestre</label>
+                            <input type="number" class="form-control" id="matIns" name="matIns" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </form>
@@ -48,7 +48,7 @@
                 <th>Nombre del alumno</th>
                 <th>Correo del alumno</th>
                 <th>Semestre del alumno</th>
-                <th>Materias inscritas</th>
+                <th>Creditos disponibles este semestre</th>
                 <th>Acciones</th>
             </tr>
         </thead>

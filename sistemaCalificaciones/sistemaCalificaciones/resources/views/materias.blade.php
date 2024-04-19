@@ -24,10 +24,18 @@
                             <input type="text" class="form-control" id="nombreM" name="nombreM" required>
                         </div>
                         <div class="mb-3">
-                            <label for="nomProf" class="form-label">Nombre del profesor</label>
-                            <input type="text" class="form-control" id="nomProf" name="nomProf" required>
+                            <label for="nom_Prof" class="form-label">Nombre del profesor:</label>
+                            <select class="form-select" id="opcionesSelect1" name="nomProf">
+                                <option selected>Seleccionar...</option>
+                                    @foreach ($maestros as $maestro)
+                                <option value="{{$maestro->nom_Prof}}">{{$maestro->nom_Prof}}</option>
+                                    @endforeach
+                            </select>
+                            {{-- <label for="nomProf" class="form-label">Nombre del profesor</label>
+                            <input type="text" class="form-control" id="nomProf" name="nomProf" required> --}}
                         </div>
                         <div class="mb-3">
+                         <label for="modalidad" class="form-label">Modalidad:</label>
                          <select class="form-select"  id="opcionesSelect1" name="Modalidad">
                       <option selected>Seleccionar...</option> 
                         <option value="Presencial" >Presencial</option>

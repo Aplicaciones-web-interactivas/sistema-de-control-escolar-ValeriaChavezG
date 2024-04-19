@@ -42,7 +42,10 @@ class adminController extends Controller
     public function listaMaterias()
     {
           $materias = materia::all();
-          return view('materias', compact('materias'));
+          $maestros = maestro::all(); // Obtener todos los maestros disponibles
+
+          return view('materias', compact('materias', 'maestros'));
+        //   return view('materias', compact('materias'));
     }
     //funcion para insertar una materia
     public function nuevaMateria(Request $request){
@@ -73,7 +76,7 @@ class adminController extends Controller
         $nuevoProfesor->nom_Prof = $request->nom_Prof;
         $nuevoProfesor->nom_materia = $request->nom_materia;
         $nuevoProfesor->correo = $request->correo;
-        $nuevoProfesor->grupo = $request->grupo;
+        // $nuevoProfesor->grupo = $request->grupo;
         $nuevoProfesor->save();
         return redirect()->back();
     }
@@ -83,13 +86,19 @@ class adminController extends Controller
         $nuevoProfesor->delete();
         return redirect()->back();
     }
+    public function listaGrupos()
+    {
+          $grupos = grupo::all();
+          $materias = materia::all(); 
+          return view('grupos', compact('grupos', 'materias'));
+    }
     //funcion para insertar un grupo
 
     public function nuevoGrupo(Request $request){
         $nuevoProfesor=new grupo();
         $nuevoProfesor->nomMateria = $request->nomMateria;
         $nuevoProfesor->salon = $request->salon;
-        $nuevoProfesor->hora = $request->hora;
+        $nuevoProfesor->NumAlumnos = $request->NumAlumnos;
         $nuevoProfesor->numGrupo = $request->numGrupo;
         $nuevoProfesor->save();
         return redirect()->back();

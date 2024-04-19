@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nom_Alumn');
             $table->string('email')->unique();
             $table->integer('semestre');
-            $table->string('matIns');
+            $table->integer('matIns');
             $table->timestamps();
         });
     }

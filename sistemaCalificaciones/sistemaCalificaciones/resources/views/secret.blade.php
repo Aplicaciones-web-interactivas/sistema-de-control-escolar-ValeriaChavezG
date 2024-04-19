@@ -55,10 +55,14 @@
                                     <a class="nav-link"  href="{{route('maestros')}}">Maestros</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link"  href="{{route('grupos')}}">Grupos</a>
+                                    <a class="nav-link"  href="{{route('materias')}}">Materias</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link"  href="{{route('materias')}}">Materias</a>
+                                    <a class="nav-link"  href="{{route('grupos')}}">Grupos</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link"  href="{{route('inscripciones')}}">Inscripción materias</a>
                                 </li>
                                     @endif
                                       

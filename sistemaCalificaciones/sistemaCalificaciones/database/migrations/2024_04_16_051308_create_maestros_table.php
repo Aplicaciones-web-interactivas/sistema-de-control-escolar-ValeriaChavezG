@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('nom_Prof');
             $table->string('nom_materia');
             $table->string('correo');
-            $table->integer('grupo');
+            // $table->integer('grupo');
             $table->timestamps();
             $table->index('nom_Prof');
-            $table->index('nom_materia');
+            
         });
     }
 
