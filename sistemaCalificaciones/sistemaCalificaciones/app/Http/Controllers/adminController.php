@@ -1,13 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\alumno;
+use App\Models\grupo;
+use App\Models\maestro;
+use App\Models\materia;
+use App\Models\User;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class adminController extends Controller
 {
     //función para un nuevo alumno
-    public function nuevaAlumno(Request $request){
+    public function nuevoAlumno(Request $request){
         $nuevoAlumno=new alumno();
         $nuevoAlumno->nom_Alumn = $request->nom_Alumn;
         $nuevoAlumno->email = $request->email;
@@ -17,7 +26,7 @@ class adminController extends Controller
         return redirect()->back();
     }
     //funcion para eliminar un alumno
-    public function eliminarpersona($id){
+    public function eliminarAlumno($id){
         $nuevoAlumno=alumno::find($id);
         $nuevoAlumno->delete();
         return redirect()->back();
