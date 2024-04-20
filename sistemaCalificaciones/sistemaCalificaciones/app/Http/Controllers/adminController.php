@@ -152,32 +152,7 @@ class adminController extends Controller
     $domPdf = new Dompdf();
 
     // Cargar el contenido HTML en Dompdf
-    $domPdf->loadHtml('<style> table {
-        width: 100%;
-        border-collapse: collapse;
-        border: 1px solid #336699; 
-    }
-    
-    th, td {
-        border: 1px solid #336699; 
-        padding: 8px;
-    }
-    
-    th {
-        background-color: #cce6ff; 
-        color: #336699;
-    }
-    
-    td {
-        background-color: #f0f7ff; 
-        color: #336699; 
-    }
-    
-    body {
-        font-family: "Arial", sans-serif;
-    }
-    
-    </style>'.$tablaPDF);
+    $domPdf->loadHtml(''.$tablaPDF);
 
     // (Opcional) Establecer el tamaño del papel y la orientación
     $domPdf->setPaper('A4', 'landscape');
