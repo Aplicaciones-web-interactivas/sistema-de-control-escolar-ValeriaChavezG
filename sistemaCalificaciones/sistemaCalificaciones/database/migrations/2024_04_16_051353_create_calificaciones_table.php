@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('calificaciones', function (Blueprint $table) {
             $table->id();
+            $table->string('Nombre_alumno');
+            $table->string('Nombre_Materia');
+            $table->string('Parcial');
+            $table->string('Calificacion');
+            $table->foreign("Nombre_alumno")->references("nom_Alumn")->on("alumnos")->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign("Nombre_Materia")->references("nombreM")->on("materias")->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

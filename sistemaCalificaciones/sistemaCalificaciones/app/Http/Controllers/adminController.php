@@ -6,6 +6,7 @@ use App\Models\grupo;
 use App\Models\maestro;
 use App\Models\materia;
 use App\Models\User;
+use App\Models\calificaciones;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -107,6 +108,28 @@ class adminController extends Controller
     public function eliminarGrupo($id){
         $nuevoProfesor=grupo::find($id);
         $nuevoProfesor->delete();
+        return redirect()->back();
+    }
+    public function listaCalificaciones()
+    {
+          $calificaciones = calificaciones::all();
+          $materias = materia::all(); 
+          $alumnos = alumno::all(); 
+          return view('calificaciones', compact('calificaciones', 'materias', 'alumnos' ));
+    }
+    public function nuevaCalificacion(Request $request){
+        $nuevaCalificacion=new calificaciones();
+        $nuevaCalificacion->Nombre_alumno = $request->Nombre_alumno;
+        $nuevaCalificacion->Nombre_Materia = $request->Nombre_Materia;
+        $nuevaCalificacion->Parcial = $request->Parcial;
+        $nuevaCalificacion->Calificacion = $request->Calificacion;
+        $nuevaCalificacion->save();
+        return redirect()->back();
+    }
+    //funcion para eliminar un alumno
+    public function eliminarCalificacion($id){
+        $nuevaCalificacion=calificaciones::find($id);
+        $nuevaCalificacion->delete();
         return redirect()->back();
     }
 }
