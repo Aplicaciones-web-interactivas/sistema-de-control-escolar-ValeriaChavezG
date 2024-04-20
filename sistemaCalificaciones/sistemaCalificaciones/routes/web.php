@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Auth;
 Route::view('/login', "login")->name('login');
 Route::view('/registro', "register")->name('registro');
 Route::view('/privada', "secret")->middleware('auth')->name('privada');
+Route::get('/', function () {
+    return view('login');
+});
 // Route::get('alumnos', [adminController::class, 'alumnos'])->name('alumnos');
 // Route::post('nuevoAlumno',[adminController::class,'nuevovotations'])->name('alumnos.nuevo');
 // Route::get('eliminarAlumno/{id}',[adminController::class,'eliminarAlumno'])->name('alumnos.eliminar');
