@@ -85,14 +85,22 @@
             </tbody>
         </table>
     </div>
-        <div>
-            <form action="{{ route('generaPDF') }}" method="post" id="formPDF">
+        <div class="container mt-5">
+            <form action="{{ route('generaPDF') }}" method="POST" id="formPDF">
                 @csrf
                 <input type="hidden" id="impresionPDF" name="impresionPDF">
                 <button type="button" id="generarPDF">Generar PDF </button>
             </form>
         </div>
     </div>
+    <form id="importForm" action="{{ route('importarExcel') }}" method="POST" enctype="multipart/form-data" class="form-inline">
+        @csrf
+        <div class="form-group">
+            <label for="file" class="mr-2">Selecciona un archivo Excel:</label>
+            <input type="file" class="form-control-file mr-2" id="file" name="file" accept=".xlsx,.xls">
+        </div>
+        <button type="submit" class="btn btn-primary">Importar</button>
+    </form>
     <script>
         $(document).ready(function() {
             $("#generarPDF").click(function() {
@@ -104,6 +112,18 @@
             $("#formPDF").submit();
         });
     });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var fileInput = document.getElementById('file');
+            var label = document.querySelector('.inputfile+label');
+
+            fileInput.addEventListener('change', function() {
+                var fileName = this.files[0].name; // Obtener el nombre del archivo seleccionado
+                label.textContent =
+                    fileName; // Actualizar el texto de la etiqueta con el nombre del archivo
+            });
+        });
     </script>
     {{-- <script>
         $(document).ready(function() {

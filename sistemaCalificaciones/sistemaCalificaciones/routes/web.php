@@ -56,6 +56,12 @@ Route::middleware('auth')->group(function () {
     // Route::post('nuevoAlumno',[AdminController::class,'nuevoAlumno'])->name('alumnos.nuevo');
     // Route::get('eliminarAlumno/{id}',[AdminController::class,'eliminarAlumno'])->name('alumnos.eliminar');
 });
+Route::middleware('auth')->group(function () {
+    // Rutas protegidas
+    Route::post('importarExcel', [AdminController::class, 'importarExcel'])->name('importarExcel');
+    // Route::post('nuevoAlumno',[AdminController::class,'nuevoAlumno'])->name('alumnos.nuevo');
+    // Route::get('eliminarAlumno/{id}',[AdminController::class,'eliminarAlumno'])->name('alumnos.eliminar');
+});
 Route::post('/validar-registro', [LoginController::class, 'register'])->name('validar-registro');
 Route::post('/inicia-sesion', [LoginController::class, 'login'])->name('inicia-sesion');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

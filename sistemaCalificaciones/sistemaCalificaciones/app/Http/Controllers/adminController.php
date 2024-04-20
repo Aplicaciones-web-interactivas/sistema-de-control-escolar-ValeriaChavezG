@@ -8,12 +8,15 @@ use App\Models\materia;
 use App\Models\User;
 use App\Models\calificaciones;
 use Dompdf\Dompdf;
-
+use App\Imports\CalificacionesImport;
+use DOMDocument;
+use Dompdf\Options;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class adminController extends Controller
 {
@@ -143,16 +146,86 @@ class adminController extends Controller
     //     return response()->streamDownload(function()use($pdf){echo $pdf;},"BoletaCalificacion.pdf");
     // }
     public function generaPDF(Request $request){
-        $tablaPDF = $request->input("tablaPDF"); // Cambia "impresionPDF" a "tablaPDF"
-        $domPdf = new Dompdf();
-        $domPdf->loadHtml($tablaPDF);
-        $domPdf->setPaper("A4", "landscape");
-        $domPdf->render();
-        $pdf = $domPdf->output();
-        return response()->streamDownload(function() use ($pdf) {
-            echo $pdf;
-        }, "BoletaCalificacion.pdf");
+    $tablaPDF = $request->input('tablaPDF');
+    
+    // Crear una instancia de Dompdf
+    $domPdf = new Dompdf();
+
+    // Cargar el contenido HTML en Dompdf
+    $domPdf->loadHtml('<style> table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #336699; 
     }
     
+    th, td {
+        border: 1px solid #336699; 
+        padding: 8px;
+    }
+    
+    th {
+        background-color: #cce6ff; 
+        color: #336699;
+    }
+    
+    td {
+        background-color: #f0f7ff; 
+        color: #336699; 
+    }
+    
+    body {
+        font-family: "Arial", sans-serif;
+    }
+    
+    </style>'.$tablaPDF);
 
+    // (Opcional) Establecer el tamaño del papel y la orientación
+    $domPdf->setPaper('A4', 'landscape');
+
+    // Renderizar el HTML como PDF
+    $domPdf->render();
+
+    // Obtener el contenido del PDF como una cadena
+    $pdf = $domPdf->output();
+
+    // Devolver el PDF generado al navegador
+    return response()->streamDownload(function () use ($pdf) {
+        echo $pdf;
+    }, 'BoletaCalificacion.pdf');
+    // public function generaPDF(Request $request){
+    //     $tablaPDF = $request->input("tablaPDF"); // Cambia "impresionPDF" a "tablaPDF"
+    //     $domPdf = new Dompdf();
+    //     $domPdf->loadHtml($tablaPDF);
+    //     $domPdf->setPaper('A4', 'landscape');
+    //     $domPdf->render();
+    //     $pdf = $domPdf->output();
+    //     return response()->streamDownload(function () use ($pdf) {
+    //         echo $pdf;
+    //     }, "BoletaCalificacion.pdf");
+    // }
+    
+    }
+    public function importarExcel(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls'
+        ]);
+        try{
+            set_time_limit(0);
+             // Validar el archivo de Excel
+        
+            // Obtener el archivo Excel enviado
+            $file = $request->file('file');
+            DB::beginTransaction();
+            // Importar los datos del archivo Excel
+            Excel::import(new CalificacionesImport(), $file);
+            DB::commit();
+            return redirect()->back()->with('success', 'Los datos se importaron correctamente.');
+            }catch(QueryException $e) {
+            DB::rollBack();
+
+            return redirect()->back()->with('error', 'Algo salio mal: favor de revisar que los datos como grupos, materias y alumnos existan');
+        }
+
+    }
 }
