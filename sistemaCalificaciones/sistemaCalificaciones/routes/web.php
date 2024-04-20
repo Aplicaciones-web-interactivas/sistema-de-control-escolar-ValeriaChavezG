@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function () {
 });
 Route::middleware('auth')->group(function () {
     // Rutas protegidas
-    Route::get('inscripciones', [AdminController::class, 'inscripciones'])->name('inscripciones');
+    Route::post('generaPDF', [AdminController::class, 'generaPDF'])->name('generaPDF');
     // Route::post('nuevoAlumno',[AdminController::class,'nuevoAlumno'])->name('alumnos.nuevo');
     // Route::get('eliminarAlumno/{id}',[AdminController::class,'eliminarAlumno'])->name('alumnos.eliminar');
 });

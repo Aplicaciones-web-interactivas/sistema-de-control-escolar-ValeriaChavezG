@@ -1,6 +1,7 @@
 @extends('secret')
 
 @section('content')
+
     <div class="container mt-5">
         <h2>Lista de Calificaciones</h2>
 
@@ -58,8 +59,8 @@
                 </div>
             </div>
         </div>
-
-        <table class="table mt-3">
+        <div id="tablaCalificacion">
+        <table class="table mt-3" >
             <thead>
                 <tr>
                     <th>Alumno</th>
@@ -84,4 +85,51 @@
             </tbody>
         </table>
     </div>
+        <div>
+            <form action="{{ route('generaPDF') }}" method="post" id="formPDF">
+                @csrf
+                <input type="hidden" id="impresionPDF" name="impresionPDF">
+                <button type="button" id="generarPDF">Generar PDF </button>
+            </form>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#generarPDF").click(function() {
+            var tabla = $("#tablaCalificacion").clone();
+            tabla.find('td:nth-child(5), td:nth-child(5)').remove();
+            var table1 = tabla.html();
+            console.log(table1);
+            $("#impresionPDF").val(table1);
+            $("#formPDF").submit();
+        });
+    });
+    </script>
+    {{-- <script>
+        $(document).ready(function() {
+            $("#generarPDF").click(function() {
+                var tablaHTML = $("#tablaCalificacion").html();
+                // $.ajax({
+                //     url: "{{ route('generaPDF') }}",
+                //     method: 'POST',
+                //     data: {
+                //         tablaPDF: tablaHTML,
+                //         _token: "{{ csrf_token() }}"
+                //     },
+                //     success: function(response) {
+                //         console.log(response);
+                //         // Si quieres redirigir al usuario al PDF generado, puedes hacerlo aquí
+                //         // window.location.href = response.url;
+                //     },
+                //     error: function(xhr, status, error) {
+                //         console.error(xhr.responseText);
+                //     }
+                // });
+                console.log(tablaHTML);
+                $("#impresionPDF").val(tablaHTML);
+                $("#formPDF").submit();
+            });
+        });
+    </script> --}}
+    
 @endsection

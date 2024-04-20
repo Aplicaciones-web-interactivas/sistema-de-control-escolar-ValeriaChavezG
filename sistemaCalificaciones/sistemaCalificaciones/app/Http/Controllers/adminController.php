@@ -7,6 +7,7 @@ use App\Models\maestro;
 use App\Models\materia;
 use App\Models\User;
 use App\Models\calificaciones;
+use Dompdf\Dompdf;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -132,4 +133,26 @@ class adminController extends Controller
         $nuevaCalificacion->delete();
         return redirect()->back();
     }
+    // public function generaPDF(Request $request){
+    //     $tablaPDF=$request->input("impresionPDF");
+    //     $domPdf=new Dompdf();
+    //     $domPdf->loadHtml($tablaPDF);
+    //     $domPdf->setPaper("A4", "landscape");
+    //     $domPdf->render();
+    //     $pdf=$domPdf->output();
+    //     return response()->streamDownload(function()use($pdf){echo $pdf;},"BoletaCalificacion.pdf");
+    // }
+    public function generaPDF(Request $request){
+        $tablaPDF = $request->input("tablaPDF"); // Cambia "impresionPDF" a "tablaPDF"
+        $domPdf = new Dompdf();
+        $domPdf->loadHtml($tablaPDF);
+        $domPdf->setPaper("A4", "landscape");
+        $domPdf->render();
+        $pdf = $domPdf->output();
+        return response()->streamDownload(function() use ($pdf) {
+            echo $pdf;
+        }, "BoletaCalificacion.pdf");
+    }
+    
+
 }
